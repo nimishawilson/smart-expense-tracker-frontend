@@ -14,6 +14,7 @@ const MOCK_EXPENSES: Expense[] = [
   { id: '3', amount: 75, category: 'Shopping', date: new Date('2025-10-03') },
   { id: '4', amount: 120, category: 'Food', date: new Date('2025-10-04') },
   { id: '5', amount: 30, category: 'Utilities', date: new Date('2025-10-05') },
+  { id: '6', amount: 30, category: 'Misc', date: new Date('2025-10-05') },
 ];
 
 const expenseService = {

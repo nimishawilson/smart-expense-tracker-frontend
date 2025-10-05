@@ -1,25 +1,33 @@
 <div class="chart-container">
-  <h2>Expense Chart</h2>
+  <div class="chart-header">
+    <h2>Expense Chart</h2>
+    <div class="chart-controls">
+      <span>Chart Type:</span>
+      <button (click)="store.updateChartType('bar')" [class.active]="store.chartType() === 'bar'">Bar</button>
+      <button (click)="store.updateChartType('pie')" [class.active]="store.chartType() === 'pie'">Pie</button>
+      <button (click)="store.updateChartType('line')" [class.active]="store.chartType() === 'line'">Line</button>
+    </div>
+  </div>
 
   @if (store.isLoading()) {
-    <p>Loading chart data...</p>
+    <div class="chart-content-loading">
+      <p>Loading chart data...</p>
+    </div>
   } @else if (store.error()) {
     <p class="error">{{ store.error() }}</p>
   } @else {
-    <div class="chart-controls">
-      <span>Chart Type: {{ store.chartType() }}</span>
-      <button (click)="store.updateChartType('bar')">Bar</button>
-      <button (click)="store.updateChartType('pie')">Pie</button>
-      <button (click)="store.updateChartType('line')">Line</button>
-    </div>
-
-    <div class="chart-data">
-      <h3>Data by Category</h3>
-      <ul>
-        @for (item of store.expensesByCategory(); track item.name) {
-          <li>{{ item.name }}: {{ item.value | currency }}</li>
+    <div class="chart-content">
+      @switch (store.chartType()) {
+        @case ('bar') {
+          <app-bar-chart [data]="store.expensesByCategory()"></app-bar-chart>
         }
-      </ul>
+        @case ('pie') {
+          <p class="placeholder">Pie chart would be displayed here.</p>
+        }
+        @case ('line') {
+          <p class="placeholder">Line chart would be displayed here.</p>
+        }
+      }
     </div>
   }
 </div>
