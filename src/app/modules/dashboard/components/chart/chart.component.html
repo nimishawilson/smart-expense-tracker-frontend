@@ -1,4 +1,25 @@
 <div class="chart-container">
-  <h2>Chart</h2>
-  <!-- Add chart library integration here -->
+  <h2>Expense Chart</h2>
+
+  @if (store.isLoading()) {
+    <p>Loading chart data...</p>
+  } @else if (store.error()) {
+    <p class="error">{{ store.error() }}</p>
+  } @else {
+    <div class="chart-controls">
+      <span>Chart Type: {{ store.chartType() }}</span>
+      <button (click)="store.updateChartType('bar')">Bar</button>
+      <button (click)="store.updateChartType('pie')">Pie</button>
+      <button (click)="store.updateChartType('line')">Line</button>
+    </div>
+
+    <div class="chart-data">
+      <h3>Data by Category</h3>
+      <ul>
+        @for (item of store.expensesByCategory(); track item.name) {
+          <li>{{ item.name }}: {{ item.value | currency }}</li>
+        }
+      </ul>
+    </div>
+  }
 </div>

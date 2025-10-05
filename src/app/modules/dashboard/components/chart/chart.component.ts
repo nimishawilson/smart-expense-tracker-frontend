@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChartStore } from './chart.store';
 
 @Component({
   selector: 'app-chart',
@@ -7,8 +8,13 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [ChartStore],
 })
 export class ChartComponent {
+  readonly store = inject(ChartStore);
 
+  constructor() {
+    this.store.loadExpenses();
+  }
 }

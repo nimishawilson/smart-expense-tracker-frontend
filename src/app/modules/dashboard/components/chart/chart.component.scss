@@ -4,4 +4,21 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-controls {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.chart-data {
+  flex-grow: 1;
+}
+
+.error {
+  color: red;
 }
